@@ -1,4 +1,4 @@
-# cirrus-example
+# cirrus-cli-example
 
 <https://github.com/cirruslabs/cirrus-cli/>
 
