@@ -8,6 +8,7 @@ first_task:
     image: alpine:3.16
   first_test_script:
     - "echo environment file: $username/$password"
+    - "cat /etc/os-release"
 
 second_task:
   env:
@@ -16,3 +17,4 @@ second_task:
     image: alpine:3.17
   second_test_script:
     - "echo environment parameters: $env_parameter"
+    - "cat /etc/os-release"
