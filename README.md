@@ -2,18 +2,9 @@
 
 <https://github.com/cirruslabs/cirrus-cli/>
 
-## Workflow
+## Example Commands
 
-```sh
-# Decrypt `sops.env`
-sops -d sops.env > .env
-# Run cirrus in dirty mode so rsync (and .gitignore) is not used.
-cirrus run -o simple -e env_parameter=hello --dirty
-# Safely remove .env from disk
-shred -z --remove .env
-```
-
-## Example commands
+## Basics
 
 Validate `.cirrus.yml` file:
 
@@ -27,8 +18,22 @@ Print output normally to console:
 cirrus run -o simple
 ```
 
-Decrypt `sops.env` and extract a single value which is passed into cirrus as an environment variable:
+Pass a value into `cirrus` as an environment variable:
 
 ```sh
-cirrus run -o simple -e password=$(sops -d --extract '["password"]' sops.env)
+cirrus run -e env_parameter="cmd-line"
+```
+
+## SOPS
+
+Decrypt `sops.env` to a temporary file and make it available only for the duration of the `cirrus` child process:
+
+```sh
+sops exec-file sops.env 'cirrus run -o simple -e env_parameter="cmd-level" --env-file {}'
+```
+
+Decrypt `sops.env` and extract a single value which gets passed to `cirrus` as an environment variable:
+
+```sh
+cirrus run -o simple -e env_parameter=$(sops -d --extract '["password"]' sops.env)
 ```
