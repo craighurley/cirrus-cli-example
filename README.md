@@ -1,5 +1,7 @@
 # cirrus-example
 
+<https://github.com/cirruslabs/cirrus-cli/>
+
 ## Workflow
 
 ```sh
