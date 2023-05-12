@@ -1,0 +1,18 @@
+---
+env:
+  env_parameter: unset
+
+first_task:
+  set_env_script: cat .env >> $CIRRUS_ENV
+  container:
+    image: alpine:3.16
+  first_test_script:
+    - "echo environment file: $username/$password"
+
+second_task:
+  env:
+    env_parameter: set-in-task
+  container:
+    image: alpine:3.17
+  second_test_script:
+    - "echo environment parameters: $env_parameter"
